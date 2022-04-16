@@ -3,6 +3,15 @@ const generateAbout = aboutText => {
   if (!aboutText) {
     return '';
   }
+
+  return `
+    <section class="my-3" id="about">
+      <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
+      <p>${aboutText}</p>
+    </section>
+  `;
+};
+
 // create the projects section
 const generateProjects = projectsArr => {
   return `
@@ -29,6 +38,7 @@ const generateProjects = projectsArr => {
       ${projectsArr
         .filter(({ feature }) => !feature)
         .map(({ name, description, languages, link }) => {
+          console.log(languages);
           return `
           <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
             <h3 class="portfolio-item-title text-light">${name}</h3>
@@ -42,6 +52,7 @@ const generateProjects = projectsArr => {
         `;
         })
         .join('')}
+    
       </div>
     </section>
   `;
@@ -55,6 +66,7 @@ module.exports = templateData => {
   return `
   <!DOCTYPE html>
   <html lang="en">
+  
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,9 +82,7 @@ module.exports = templateData => {
       <div class="container flex-row justify-space-between align-center py-3">
         <h1 class="page-title text-secondary bg-dark py-2 px-3">${header.name}</h1>
         <nav class="flex-row">
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${
-            header.github
-          }">GitHub</a>
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${header.github}">GitHub</a>
         </nav>
       </div>
     </header>
@@ -81,10 +91,9 @@ module.exports = templateData => {
       ${generateProjects(projects)}
     </main>
     <footer class="container text-center py-3">
-      <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${header.name}</h3>
+      <h3 class="text-dark">&copy;2020 by ${header.name}</h3>
     </footer>
   </body>
   </html>
   `;
-        }
-      };
+};
